@@ -7,12 +7,16 @@
 </head>
 <body style="font-family: sans-serif; text-align: center; padding: 50px;">
   <h1>⏰ 때맞이 30시간 뒤 예약 버튼</h1>
-  <p>버튼을 누르면 <strong>현재 시간 기준 정확히 30시간 뒤</strong> 구글 캘린더 일정이 자동으로 만들어집니다.</p>
+  <p>버튼을 누르면 <strong>현재 시간 기준 정확히 30시간 뒤</strong> 구글 캘린더 일정 링크가 생성됩니다.</p>
 
-  <a id="calendarLink" href="#" style="display:none;" target="_blank">🔗</a>
   <button onclick="createEvent()" style="font-size: 20px; padding: 10px 20px; cursor: pointer;">
-    ✅ 30시간 뒤 알림 예약하기
+    ✅ 30시간 뒤 알림 링크 만들기
   </button>
+
+  <div id="linkContainer" style="margin-top: 20px; display: none;">
+    <p>👇 아래 링크를 직접 눌러 구글 캘린더에 등록하세요:</p>
+    <a id="calendarLink" href="#" target="_blank" style="font-size: 18px; color: blue; text-decoration: underline;">📅 30시간 뒤 일정 등록하러 가기</a>
+  </div>
 
   <script>
     function pad(n) {
@@ -41,7 +45,8 @@
 
       const anchor = document.getElementById("calendarLink");
       anchor.href = link;
-      anchor.click(); // 모바일에서도 무조건 동작하도록 직접 클릭
+
+      document.getElementById("linkContainer").style.display = "block";
     }
   </script>
 </body>
