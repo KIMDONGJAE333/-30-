@@ -9,6 +9,7 @@
   <h1>⏰ 때맞이 30시간 뒤 예약 버튼</h1>
   <p>버튼을 누르면 <strong>현재 시간 기준 정확히 30시간 뒤</strong> 구글 캘린더 일정이 자동으로 만들어집니다.</p>
 
+  <a id="calendarLink" href="#" style="display:none;" target="_blank">🔗</a>
   <button onclick="createEvent()" style="font-size: 20px; padding: 10px 20px; cursor: pointer;">
     ✅ 30시간 뒤 알림 예약하기
   </button>
@@ -37,7 +38,10 @@
       const details = encodeURIComponent("때맞이 자동 알림: 30시간 뒤 확인해야 할 일!");
 
       const link = `https://www.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${startTime}/${endTime}&details=${details}&sf=true&output=xml`;
-      window.location.href = link; // 모바일에서도 확실히 작동하게 location으로 이동
+
+      const anchor = document.getElementById("calendarLink");
+      anchor.href = link;
+      anchor.click(); // 모바일에서도 무조건 동작하도록 직접 클릭
     }
   </script>
 </body>
