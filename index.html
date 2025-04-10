@@ -8,6 +8,7 @@
 <body style="font-family: sans-serif; text-align: center; padding: 50px;">
   <h1>⏰ 때맞이 30시간 뒤 예약 버튼</h1>
   <p>버튼을 누르면 <strong>현재 시간 기준 정확히 30시간 뒤</strong> 구글 캘린더 일정이 자동으로 만들어집니다.</p>
+
   <button onclick="createEvent()" style="font-size: 20px; padding: 10px 20px; cursor: pointer;">
     ✅ 30시간 뒤 알림 예약하기
   </button>
@@ -17,19 +18,18 @@
       return n < 10 ? '0' + n : n;
     }
 
+    function toGCalTime(date) {
+      return date.getUTCFullYear().toString()
+        + pad(date.getUTCMonth() + 1)
+        + pad(date.getUTCDate()) + 'T'
+        + pad(date.getUTCHours())
+        + pad(date.getUTCMinutes()) + '00Z';
+    }
+
     function createEvent() {
       const now = new Date();
-      const start = new Date(now.getTime() + 30 * 60 * 60 * 1000); // 30시간 뒤
-      const end = new Date(start.getTime() + 15 * 60 * 1000); // 15분 뒤 종료
-
-      function toGCalTime(date) {
-        return date.getUTCFullYear().toString()
-          + pad(date.getUTCMonth() + 1)
-          + pad(date.getUTCDate()) + 'T'
-          + pad(date.getUTCHours())
-          + pad(date.getUTCMinutes()) + '00Z';
-      }
-
+      const start = new Date(now.getTime() + 30 * 60 * 60 * 1000);
+      const end = new Date(start.getTime() + 15 * 60 * 1000);
       const startTime = toGCalTime(start);
       const endTime = toGCalTime(end);
 
@@ -37,7 +37,7 @@
       const details = encodeURIComponent("때맞이 자동 알림: 30시간 뒤 확인해야 할 일!");
 
       const link = `https://www.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${startTime}/${endTime}&details=${details}&sf=true&output=xml`;
-      window.open(link, '_blank');
+      window.location.href = link; // 모바일에서도 확실히 작동하게 location으로 이동
     }
   </script>
 </body>
